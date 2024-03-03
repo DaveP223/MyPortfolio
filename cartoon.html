@@ -87,6 +87,21 @@ cantoon.fillStyle = 'black';
 for (let i = 0; i < canvas.width; i += 20) {
     cantoon.fillRect(i, 315, 10, 80);
 }
+cantoon.fillStyle = 'white'; // Set cloud color
+cantoon.beginPath();
+cantoon.arc(200, 100, 20, 0, Math.PI * 2); // Draw first circle
+cantoon.arc(230, 90, 25, 0, Math.PI * 2); // Draw second circle
+cantoon.arc(260, 100, 20, 0, Math.PI * 2); // Draw third circle
+cantoon.arc(230, 110, 25, 0, Math.PI * 2); // Draw fourth circle
+cantoon.fill(); // Draw cloud by filling the circles
+
+cantoon.fillStyle = 'white'; // Set cloud color
+cantoon.beginPath();
+cantoon.arc(400, 100, 20, 0, Math.PI * 2); // Draw first circle
+cantoon.arc(430, 90, 25, 0, Math.PI * 2); // Draw second circle
+cantoon.arc(460, 100, 20, 0, Math.PI * 2); // Draw third circle
+cantoon.arc(430, 110, 25, 0, Math.PI * 2); // Draw fourth circle
+cantoon.fill(); // Draw cloud by filling the circles
 </script>
 <a href="index.html">Back to Portfolio</a>
 
