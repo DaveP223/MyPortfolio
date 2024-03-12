@@ -16,5 +16,7 @@
 <p><a href="mailto:davepierred@yahoo.com">davepierred@yahoo.com</a></p>
 
 <a href="cartoon.html">View Masterpiece</a>
+<h1> Labs </h1>
+<a href="fruitbars.html">Fruitbars</a>
 </body>
 </html>
