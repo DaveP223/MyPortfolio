@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cartoon</title>
+    <style>
+    body {
+        font-family: Times New Roman;
+        text-align: center;
+        background-color: blue;
+    }
+    canvas {
+        border: 5px solid purple;
+        margin: 15px auto;
+        background-color: #add8e6;
+    }
+    a {
+        display: block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: black;
+        text-decoration: none;
+    }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Cartoon 1of1</h1>
+
+<canvas id="myCanvas" width="600" height="400"></canvas>
+
+<script>
+var caption = "Cartoon Mountain";
+var canvas = document.getElementById('myCanvas');
+var cartoon = canvas.getContext('2d');
+
+// Define initial positions and direction for animation
+var sunX = 550;
+var sunY = 15;
+var sunDirection = -.8; // Initially moving downwards
+
+var moonX = 50;
+var moonY = 190;
+var moonDirection = .5; // Initially moving upwards
+
+var cloud1X = 200;
+var cloud2X = 400;
+var cloudDirection1 = -1; // Initially moving leftwards
+var cloudDirection2 = -1; // Initially moving leftwards
+
+
+function draw() {
+    // Clear the canvas
+    cartoon.clearRect(0, 0, canvas.width, canvas.height);
+
+    // caption text
+    cartoon.fillStyle = 'white';
+    cartoon.font = '26px Times New Roman';
+    cartoon.fillText(caption, 90, 55);
+
+    // sun
+    cartoon.beginPath();
+    cartoon.arc(sunX, sunY, 30, 0, Math.PI * 2);
+    cartoon.fillStyle = 'yellow';
+    cartoon.fill();
+
+      // moon
+    cartoon.beginPath();
+    cartoon.arc(moonX, moonY, 30, 0, Math.PI * 2);
+    cartoon.fillStyle = 'silver';
+    cartoon.fill();
+
+
+    // mountains
+    cartoon.fillStyle = 'grey';
+    cartoon.beginPath();
+    cartoon.moveTo(0, 250);
+    cartoon.lineTo(100, 90);
+    cartoon.lineTo(300, 250);
+    cartoon.lineTo(450, 150);
+    cartoon.lineTo(600, 250);
+    cartoon.fill();
+
+    // ground
+    cartoon.fillStyle = '#8B4513';
+    cartoon.fillRect(0, 250, canvas.width, canvas.height - 250);
+
+    // house 1
+    cartoon.fillStyle = 'purple';
+    cartoon.fillRect(100, 180, 100, 70);
+
+    // windows
+    cartoon.fillStyle = 'white';
+    cartoon.fillRect(110, 195, 30, 30);
+    cartoon.fillRect(160, 195, 30, 30);
+    // door
+    cartoon.fillStyle = 'black';
+    cartoon.fillRect(140, 230, 20, 20);
+    // house 2
+    cartoon.fillStyle = 'blue'; // House color
+    cartoon.fillRect(250, 160, 90, 90); // Main body
+    cartoon.fillStyle = 'white'; // Window color
+    cartoon.fillRect(260, 165, 30, 30); // Window 1
+    cartoon.fillRect(300, 165, 30, 30); // Window 2
+    cartoon.fillStyle = 'brown'; // Door color
+    cartoon.fillRect(280, 210, 30, 40); // Door
+    // grass
+    cartoon.fillStyle = 'green';
+    for (let i = 0; i < canvas.width; i += 20) {
+        cartoon.fillRect(i, 255, 20, 80);
+    }
+    // fence
+    cartoon.fillStyle = 'black';
+    for (let i = 0; i < canvas.width; i += 20) {
+        cartoon.fillRect(i, 315, 10, 80);
+    }
+
+    // Draw moving clouds
+    cartoon.fillStyle = 'white';
+    cartoon.beginPath();
+    cartoon.arc(cloud1X, 100, 20, 0, Math.PI * 2); // first circle for cloud 1
+    cartoon.arc(cloud1X + 30, 90, 25, 0, Math.PI * 2); // second circle for cloud 1
+    cartoon.arc(cloud1X + 60, 100, 20, 0, Math.PI * 2); // third circle for cloud 1
+    cartoon.arc(cloud1X + 30, 110, 25, 0, Math.PI * 2); // fourth circle for cloud 1
+    cartoon.fill(); // cloud 1 by filling the circles
+
+    cartoon.beginPath();
+    cartoon.arc(cloud2X, 100, 20, 0, Math.PI * 2); // first circle for cloud 2
+    cartoon.arc(cloud2X + 30, 90, 25, 0, Math.PI * 2); // second circle for cloud 2
+    cartoon.arc(cloud2X + 60, 100, 20, 0, Math.PI * 2); // third circle for cloud 2
+    cartoon.arc(cloud2X + 30, 110, 25, 0, Math.PI * 2); // fourth circle for cloud 2
+    cartoon.fill(); // cloud 2 by filling the circles
+
+
+
+    // Update positions for next frame
+    sunY += 0.2 * sunDirection;
+    moonY -= 0.2 * moonDirection;
+    cloud1X += 0.1 * cloudDirection1;
+    cloud2X += 0.1 * cloudDirection2;
+
+
+    // Reverse direction if the sun reaches certain limits
+    if (sunY >= 200 || sunY <= 14) {
+        sunDirection *= -.9;
+    }
+     // Reverse direction if the moon reaches certain limits
+    if (moonY >= 190 || moonY <= 50) {
+        moonDirection *= -1;
+    }
+
+
+    // Reverse direction if the clouds reach certain limits
+    if (cloud1X >= 260 || cloud1X <= 40) {
+        cloudDirection1 *= -1;
+    }
+    if (cloud2X >= 460 || cloud2X <= 340) {
+        cloudDirection2 *= -1;
+    }
+
+
+    // Request next frame
+    requestAnimationFrame(draw);
+}
+
+// Start the animation
+draw();
+</script>
+<a href="index.html">Back to Portfolio</a>
+</body>
+</html>
