@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sound Effect Machine</title>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #soundMachine {
+            display: inline-block;
+            border: 2px solid black;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        button:hover {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="soundMachine">
+  <h2>Sound Effect Machine</h2>
+  <button onclick="playSound('https://cdn.pixabay.com/download/audio/2024/04/07/audio_ffb78672f1.mp3?filename=sci-fi-sound-effect-designed-circuits-hum-24-200825.mp3')">Sound Effect 1</button>
+  <button onclick="playSound('https://cdn.pixabay.com/download/audio/2024/01/18/audio_65e75a81a2.mp3?filename=gospel-choir-heavenly-transition-3-186880.mp3')">Sound Effect 2</button>
+  <button onclick="playSound('https://cdn.pixabay.com/download/audio/2023/08/11/audio_51edb7be8b.mp3?filename=rock-cinematic-161648.mp3')">Sound Effect 3</button>
+  <button onclick="playSound('https://cdn.pixabay.com/download/audio/2023/07/06/audio_e12e5bea9d.mp3?filename=epic-hybrid-logo-157092.mp3')">Sound Effect 4</button>
+  <button onclick="playSound('https://cdn.pixabay.com/download/audio/2023/09/06/audio_9156365c45.mp3?filename=ambient-piano-logo-165357.mp3')">Sound Effect 5</button>
+</div>
+
+<audio id="audioPlayer"></audio>
+
+<script>
+    function playSound(soundFile) {
+        var audio = document.getElementById('audioPlayer');
+        audio.src = soundFile;
+        audio.play();
+    }
+</script>
+
+</body>
+</html>
