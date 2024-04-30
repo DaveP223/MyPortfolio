@@ -8,18 +8,33 @@
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    #tvContainer {
+      width: 80%; /* Adjust the size of the TV container */
+      max-width: 800px; /* Set a maximum width for the TV */
+      border: 10px solid black; /* Border to resemble a TV frame */
+      border-radius: 20px; /* Rounded corners for the TV frame */
+      overflow: hidden; /* Hide overflowing content */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add a shadow for depth */
     }
 
     #wickAnimation {
-      width: 100vw;
-      height: 100vh;
+      width: 100%; /* Make the video fill the TV container */
+      display: block; /* Ensure the video is displayed as a block element */
     }
   </style>
 </head>
 <body>
-   <video width="640" height="360" controls>
-        <source src="wickAnimation1.mp4" type="video/mp4">
+  <div id="tvContainer">
+    <video id="wickAnimation" controls>
+      <source src="wickAnimation1.mp4" type="video/mp4">
     </video>
+  </div>
 </body>
 </html>
