@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<canvas id="doughnut-chart" width="400" height="300"></canvas>
+<canvas id="bar-chart" width="400" height="300"></canvas>
+
+<script>
+        // Doughnut chart data for midterm scores
+        const doughnutData = {
+            labels: ['Bsn', 'Anth', 'Musc', 'Bio', 'Mth'],
+            datasets: [{
+                label: 'Midterm Score (Dave Pierre)',
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+                data: [99, 90, 78, 68, 83] // Midterm scores for each subject
+            }]
+        };
+
+        // Bar chart data for final scores
+        const barData = {
+            labels: ['Bsn', 'Anth', 'Musc', 'Bio', 'Mth'],
+            datasets: [{
+                label: 'Final Score (Dave Pierre)',
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+                data: [100, 84, 75, 70, 93] // Final scores for each subject
+            }]
+        };
+
+        // Doughnut chart options
+        const doughnutOptions = {
+            title: {
+                display: true,
+                text: 'Midterm Scores' // Title for the Doughnut chart
+            }
+        };
+
+        // Bar chart options
+        const barOptions = {
+            title: {
+                display: true,
+                text: 'Final Scores' // Title for the Bar chart
+            }
+        };
+
+        // Render Doughnut chart
+        new Chart(document.getElementById('doughnut-chart'), {
+            type: 'doughnut',
+            data: doughnutData,
+            options: doughnutOptions
+        });
+
+        // Render Bar chart
+        new Chart(document.getElementById('bar-chart'), {
+            type: 'bar',
+            data: barData,
+            options: barOptions
+        });
+    </script>
+</body>
+</html>
