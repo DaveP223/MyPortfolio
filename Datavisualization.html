@@ -7,19 +7,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* CSS to arrange canvas elements side by side */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         canvas {
-            width: 20px;
-            height: 10px;
-            margin-right: 5px; /* Add some space between the charts */
+            width: 400px;
+            height: 200px;
+            margin-right: 20px; /* Add some space between the charts */
         }
     </style>
 </head>
 <body>
+<!-- Container for the charts -->
+<div>
     <!-- Canvas elements to render the charts -->
     <canvas id="doughnut-chart"></canvas>
     <canvas id="bar-chart"></canvas>
+</div>
 
-    <script>
+<script>
         // Doughnut chart data for midterm scores
         const doughnutData = {
             labels: ['Bsn', 'Anth', 'Musc', 'Bio', 'Mth'],
@@ -70,6 +81,6 @@
             options: barOptions
         });
     </script>
-     <a href="index.html">Back to Portfolio</a>
+<a href="index.html">Back to Portfolio</a>
 </body>
 </html>
