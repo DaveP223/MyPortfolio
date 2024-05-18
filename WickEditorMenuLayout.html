@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WickEditor Project</title>
+    <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    #menu {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    #menu button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    #wickContainer {
+      width: 80%;
+      max-width: 800px;
+      border: 10px solid black;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    #wickAnimation {
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<!-- Menu for navigation -->
+<div id="menu">
+    <button onclick="navigateTo('Gliding Batman')">1. Gliding Batman</button>
+    <button onclick="navigateTo('Gliding Batman Photo')">2. Gliding Batman Photo</button>
+    <button onclick="navigateTo('AT&T Badge')">3. AT&T Badge</button>
+</div>
+
+<!-- Container for Wick Editor project -->
+<div id="wickContainer">
+    <!-- Placeholder for Wick Editor project -->
+    <div id="wickAnimation"></div>
+</div>
+
+<a href="index.html">Back to Portfolio</a>
+
+<script src="path/to/wick-editor.js"></script>
+<script>
+    // Initialize the Wick Editor project
+    const project = new WickPlayer({
+      project: "path/to/your-wick-project.wick", // Path to the exported Wick project file
+      container: document.getElementById('wickAnimation')
+    });
+
+    // Function to navigate to specific frames
+    function navigateTo(frameName) {
+      const wickAnimation = document.getElementById('wickAnimation');
+      if (frameName === 'Gliding Batman') {
+        wickAnimation.innerHTML = '<video id="wickAnimation" controls><source src="wickAnimation1.mp4" type="video/mp4"></video>';
+      } else if (frameName === 'Gliding Batman Photo') {
+        wickAnimation.innerHTML = '<img src="GlidingBatmanPhoto.png" alt="Gliding Batman Photo" id="wickAnimation">';
+      } else if (frameName === 'AT&T Badge') {
+        wickAnimation.innerHTML = '<img src="AT&T.png" alt="AT&T Badge" id="wickAnimation">';
+      }
+    }
+
+    // Ensure project is ready before adding navigation logic
+    project.onReady = function() {
+      console.log('Wick project loaded and ready');
+    };
+  </script>
+</body>
+</html>
