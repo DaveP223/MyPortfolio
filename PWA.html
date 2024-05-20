@@ -12,13 +12,8 @@
         }
 
         .bg-img {
-            /* The image used */
             background-image: url('https://www.americanrivers.org/wp-content/uploads/2022/12/AmyMartin_GC_from_above-1536x1024.jpg');
-
-            /* Full height */
             height: 100%;
-
-            /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -72,7 +67,6 @@
 </div>
 
 <script>
-    // Function to convert weight
     function convertWeight(weight, unit) {
         if (unit === 'kg') {
             return (weight * 2.20462).toFixed(2) + ' lbs';
@@ -81,30 +75,24 @@
         }
     }
 
-    // Retrieve saved weight from localStorage
     var savedWeight = localStorage.getItem('weight');
     if (savedWeight) {
         document.getElementById('weight').value = savedWeight;
     }
 
-    // Calculate and display result on form submission
     document.getElementById('conversionForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
         var weight = parseFloat(document.getElementById('weight').value);
         var unit = document.querySelector('input[name="unit"]:checked').value;
         var result = convertWeight(weight, unit);
         document.getElementById('result').innerHTML = result;
-
-        // Save entered weight to localStorage
         localStorage.setItem('weight', weight);
     });
 
-    // Reset form and clear localStorage on Reset button click
     document.getElementById('conversionForm').addEventListener('reset', function() {
         localStorage.removeItem('weight');
     });
 
-    // Register the service worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('service-worker.js').then(function(registration) {
@@ -117,92 +105,6 @@
 </script>
 
 <a href="index.html">Back to Portfolio</a>
-
-<!-- Manifest JSON -->
-<script type="application/json" id="manifest">
-{
-  "name": "Weight Conversion Calculator",
-  "short_name": "WeightCalc",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
-  "icons": [
-    {
-      "src": "icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
-</script>
-
-<!-- Service Worker Script -->
-<script type="text/javascript" id="service-worker">
-const CACHE_NAME = 'weight-conversion-calculator-v1';
-const urlsToCache = [
-  '/index.html',
-  '/icon-192x192.png',
-  '/icon-512x512.png'
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
-
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request);
-      })
-  );
-});
-
-self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
-</script>
-
-<script>
-  // Inject the manifest file into the head
-  const manifestEl = document.createElement('link');
-  manifestEl.rel = 'manifest';
-  manifestEl.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(document.getElementById('manifest').textContent);
-  document.head.appendChild(manifestEl);
-
-  // Inject the service worker script into a blob URL
-  const serviceWorkerBlob = new Blob([document.getElementById('service-worker').textContent], { type: 'application/javascript' });
-  const serviceWorkerBlobURL = URL.createObjectURL(serviceWorkerBlob);
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(serviceWorkerBlobURL).then(function(registration) {
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(error) {
-      console.log('ServiceWorker registration failed: ', error);
-    });
-  }
-</script>
 
 </body>
 </html>
