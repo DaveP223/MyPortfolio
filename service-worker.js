@@ -1,11 +1,8 @@
 const CACHE_NAME = 'weight-conversion-calculator-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css', // if you have a separate CSS file
-  '/script.js', // if you have a separate JS file
-  '/icon-192x192.png',
-  '/icon-512x512.png'
+  './index.html',
+  './icon-192x192.png',
+  './icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
