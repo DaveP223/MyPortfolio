@@ -1,7 +1,7 @@
 {
   "name": "Weight Conversion Calculator",
   "short_name": "WeightCalc",
-  "start_url": "./pwa.html",
+  "start_url": "./PWA.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",
