@@ -103,13 +103,11 @@
     document.getElementById('conversionForm').addEventListener('reset', function() {
         localStorage.removeItem('weight');
     });
-</script>
 
-<script>
     // Register the service worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
             }, function(error) {
                 console.log('ServiceWorker registration failed: ', error);
@@ -119,6 +117,92 @@
 </script>
 
 <a href="index.html">Back to Portfolio</a>
+
+<!-- Manifest JSON -->
+<script type="application/json" id="manifest">
+{
+  "name": "Weight Conversion Calculator",
+  "short_name": "WeightCalc",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+</script>
+
+<!-- Service Worker Script -->
+<script type="text/javascript" id="service-worker">
+const CACHE_NAME = 'weight-conversion-calculator-v1';
+const urlsToCache = [
+  '/index.html',
+  '/icon-192x192.png',
+  '/icon-512x512.png'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        return response || fetch(event.request);
+      })
+  );
+});
+
+self.addEventListener('activate', event => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+</script>
+
+<script>
+  // Inject the manifest file into the head
+  const manifestEl = document.createElement('link');
+  manifestEl.rel = 'manifest';
+  manifestEl.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(document.getElementById('manifest').textContent);
+  document.head.appendChild(manifestEl);
+
+  // Inject the service worker script into a blob URL
+  const serviceWorkerBlob = new Blob([document.getElementById('service-worker').textContent], { type: 'application/javascript' });
+  const serviceWorkerBlobURL = URL.createObjectURL(serviceWorkerBlob);
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register(serviceWorkerBlobURL).then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(error) {
+      console.log('ServiceWorker registration failed: ', error);
+    });
+  }
+</script>
 
 </body>
 </html>
